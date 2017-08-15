@@ -320,5 +320,30 @@ public function getSupplierAlbums($supplier_id){
   return $result;
 }
 
+public function saveTestimonial($supplier_id, $the_couple, $event_date, $reco_text){
+  try{
+  $stmt = $this->conn->prepare("INSERT INTO  w_testimonials (
+      `testimonial_id`,
+      `supplier_id` ,
+      `text` ,
+      `submit_date` ,
+      `event_date`, 
+      `testimonial_name` 
+      )
+      VALUES (
+        NULL, :supplier_id, :reco_text, CURRENT_TIMESTAMP, :event_date, :the_couple);");
+
+      $stmt->bindparam(":supplier_id", $supplier_id);
+      $stmt->bindparam(":reco_text", $reco_text);
+      $stmt->bindparam(":event_date", $event_date);
+      $stmt->bindparam(":the_couple", $the_couple);
+			$stmt->execute();
+
+			return $stmt;
+    }catch (PDOException $e){
+      echo $e->getMessage();
+    }
+}
+
 //End of Admin Class
 }
