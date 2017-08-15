@@ -1,6 +1,7 @@
 <?php require_once('head.php'); ?>
 <?php 
 $albums = $auth_admin->getAllAlbums();
+//var_dump($albums); exit;
 ?>
 
 <body>
@@ -21,14 +22,14 @@ $albums = $auth_admin->getAllAlbums();
                         <section class="page">
                             <?php 
                             foreach($albums as $album){ 
-                               $search_dir = "images/albums/".$album['album_name'];
+                               $search_dir = ALBUMS_PATH . $album["supplier_id"] . "/" . $album['album_id'];
                                 $images = glob("$search_dir/*.*");
                                 sort($images);
                                 //display one image:
 //                                var_dump($images);
                                 if(isset($images[0])){
-                                echo '<a href="album.php?album_name='.$album['album_name'].'">';
-                                echo "<img src='$images[0]' height='150' width='150' /> </a>";
+                                echo '<a href="album.php?album_id='.$album['album_id'].'&supplier_id='.$album["supplier_id"].'&album_name='.$album['album_name'].'">';
+                                echo "<img src='image.php?path=$images[0]' height='150' width='150' /> </a>";
                                 }
                             } 
                             ?>

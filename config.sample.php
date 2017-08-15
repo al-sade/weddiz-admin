@@ -4,6 +4,7 @@ define('USER', 'DB_USER');
 define('PASS', 'DB_PASS');
 define('DB', 'DB_NAME');
 
+define('ALBUMS_PATH', '/path/to/albums/dir/');
 define('BASEURL', 'LOCAL_BASE_ULR');
 define('LOCAL', 'ROOT_DIR');
 define('LOCALIMG', 'base_url./assets/uploads/');

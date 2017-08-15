@@ -1,6 +1,8 @@
 <?php require_once('head.php'); ?>
-<?php 
-$album_name = $_GET['album_name'];
+<?php
+$albumId = $_GET['album_id'];
+$supplierId = $_GET['supplier_id'];
+$albumName = $_GET['album_name'];
 ?>
 
 <body>
@@ -14,40 +16,42 @@ $album_name = $_GET['album_name'];
                                 <ol class="breadcrumb">
                                     <li><a href="#"><i class="fa fa-home"></i></a></li>
                                     <li class="active">רשימת אלבומים</li>
-                                    <li class="active"><?php echo $album_name; ?></li>
+                                    <li class="active"><?php echo $albumName; ?></li>
                                 </ol>
                             </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <section class="page">
-                            <h2><?php echo $album_name; ?></h2>
+                            <h2><?php echo $albumName; ?></h2>
                                                                     
                             <?php
-                               $files = glob("images/albums/".$album_name."/*.*");
+                               $files = glob(ALBUMS_PATH . $supplierId . "/" . $albumId. "/*.*");
 
-                                 for ($i=1; $i<count($files); $i++)
+                               foreach ($files as $file){
+                                   $image = $file;
 
-                                {
+                                   $supported_file = array(
+                                       'gif',
+                                       'jpg',
+                                       'jpeg',
+                                       'png'
+                                   );
 
-                                $image = $files[$i];
-                                $supported_file = array(
-                                'gif',
-                                'jpg',
-                                'jpeg',
-                                'png'
-                               );
+                                   $ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
 
-                               $ext = strtolower(pathinfo($image, PATHINFO_EXTENSION));
-                               if (in_array($ext, $supported_file)) {
-                                   $output = '<div class="album-img" ';
-                                   $output .= 'style="background-image: url('.$image.')"></div>';
-                                   echo $output;
+                                   if (in_array($ext, $supported_file)) {
+                                       $imgSrc = "image.php?path=". $image ;
+
+                                       $output = '<div class="album-img" >';
+                                       $output .= '<img src="'.$imgSrc.'" height="150" width="150" /></div>';
+                                       //$output .= 'style="background-image: url('."image.php?path=".$image.')"></div>';
+                                       echo $output;
 //                                echo '<img src="'.$image .'" alt="Random image" />'."<br /><br />";
-                               } else {
-                                continue;
-                              }
+                                   } else {
+                                       continue;
+                                   }
+                               }
 
-                              }
                             ?>
                         </section>
                     </div>

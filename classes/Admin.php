@@ -298,7 +298,8 @@ public function saveAlbumRecord($album_name, $supplier_id){
       $stmt->bindparam(":supplier_id", $supplier_id);
       $stmt->bindparam(":album_name", $album_name);
       $stmt->execute();
-      return $stmt;
+      return $this->conn->lastInsertId();
+
         }catch (PDOException $e){
             echo $e->getMessage();
      }
