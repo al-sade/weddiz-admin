@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83cf91da-e40b-47db-8efe-2195acf7ebc9" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/wed-admin.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -305,6 +302,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="removed .idea from git" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed .idea from git" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
