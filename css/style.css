@@ -1,6 +1,19 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,800';
 
 /*** Al's Custom***/
+
+.update-sup input:hover{
+    cursor: pointer;
+}
+.delete-button, .update-sup input{
+    border: none;
+}
+
+.delete-button:hover{
+    color: #e23515;
+    font-weight: bold;
+}
+
 .album-img {
     height: 250px;
     width: 250px;

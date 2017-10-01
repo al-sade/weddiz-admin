@@ -4,15 +4,33 @@ require_once('head.php');
 if(isset($_GET['r_sid'])){
    $supplier_id = $_GET['r_sid'];
    $supplier = $auth_admin->getRecoSupplier($supplier_id); 
-   $cat_name = $auth_admin->getRecoCategoryName($supplier['category_id']);
+   $supplier['category'] = $auth_admin->getRecoCategoryName($supplier['category_id']);
 }else{
    $supplier_id = $_GET['sid'];
    $supplier = $auth_admin->getSupplier($supplier_id);
-   $cat_name = $auth_admin->getCategoryName($supplier['category_id']);
+   $supplier['category'] = $auth_admin->getCategoryName($supplier['category_id']);
 }
 
 $supplier_name = $supplier['first_name'].' '.$supplier['last_name'];
 $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
+
+if (isset($_POST['update'])){
+    $supplier_data['supplier_id'] = $supplier_id;
+    $supplier_data['first_name'] = strip_tags($_POST['first_name']);
+    $supplier_data['last_name'] = strip_tags($_POST['last_name']);
+	$supplier_data['email'] = strip_tags($_POST['email']);
+	$supplier_data['phone'] = strip_tags($_POST['phone']);
+	$supplier_data['category'] = strip_tags($_POST['category']);
+	$supplier_data['location'] = strip_tags($_POST['location']);
+	$supplier_data['price'] = strip_tags($_POST['price']);
+	$supplier_data['video_link'] = strip_tags($_POST['video_link']);
+	$supplier_data['address'] = strip_tags($_POST['address']);
+	$supplier_data['description'] = strip_tags($_POST['description']);
+
+    $auth_admin->updateSupplier($supplier_data);
+    echo "<meta http-equiv='refresh' content='0'>";
+
+}
  ?>
 
     <body>
@@ -25,7 +43,7 @@ $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="page-title">
-                                        <h1>My Profile <small></small></h1>
+                                        <!-- <h1>My Profile <small></small></h1> -->
                                         <ol class="breadcrumb">
                                             <li><a href="#"><i class="fa fa-home"></i></a></li>
                                             <li class="active">פרופיל ספק</li>
@@ -34,6 +52,9 @@ $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
                                 </div>
                             </div>
                             <!-- end .page title-->
+
+                            <!-- Start Profile Data -->
+
                             <div class="col-md-4 margin-b-30">
                                 <div class="profile-overview">
                                     <div class="avtar text-center"> <img src="<?php echo $supplier_pic ?>" alt="" class="img-thumbnail">
@@ -61,65 +82,10 @@ $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
                                     </a></td>
                                                 <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>
-                                            <tr>
-                                                <td>email:</td>
-                                                <td>
-                                                    <a href="mailto:<?php echo $supplier['email'] ?>">
-                                                        <?php echo $supplier['email']; ?>
-                                                    </a>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>phone:</td>
-                                                <td>
-                                                    <?php echo $supplier['phone']; ?>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="table profile-detail table-condensed table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="3">מידע כללי</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>קטגוריה</td>
-                                                <td>
-                                                    <?php echo $cat_name['category_name']; ?>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>מיקום</td>
-                                                <td>
-                                                    <?php echo $supplier['location'] ?>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>מחיר</td>
-                                                <td>
-                                                    <?php echo $supplier['price'] ?>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                            <tr>
+                                        <tr>
                                                 <td>וידאו</td>
                                                 <td>
                                                     <a href="<?php echo $supplier['video_link'] ?>" target="_blank">נגן סרטון</a>
-                                                </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>כתובת</td>
-                                                <td>
-                                                    <a href="#">
-                                                        <?php echo $supplier['address'] ?>
-                                                    </a>
                                                 </td>
                                                 <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>
@@ -136,41 +102,72 @@ $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
                                             </tr>
                                         </tbody>
                                     </table>
+                                   
                                 </div>
                             </div>
+                                      
+                            <!-- End Profile Data -->
+
+                            <!-- Start Profile Form -->
+
                             <div class="col-md-5 margin-b-30">
                                 <div class="profile-edit">
-                                    <form class="form-horizontal" method="get">
-                                        <h4 class="mb-xlg">עדכון פרטים</h4>
+                                    <form class="form-horizontal update-sup" method="post">
+                                        <h4 class="mb-xlg">פרטים</h4>
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label" for="profileFirstName">שם פרטי</label>
+                                                <label class="col-md-3 control-label">שם פרטי</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" id="profileFirstName"> </div>
+                                                    <input type="text" class="form-control" name="first_name" value="<?php echo $supplier['first_name'] ?>"> </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label" for="profileLastName">שם משפחה</label>
+                                                <label class="col-md-3 control-label">שם משפחה</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" id="profileLastName"> </div>
+                                                    <input type="text" class="form-control" name="last_name" value="<?php echo $supplier['last_name'] ?>"> </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label" for="profileAddress">כתובת</label>
+                                                <label class="col-md-3 control-label">eMail</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" id="profileAddress"> </div>
+                                                    <input type="text" class="form-control" name="email" value="<?php echo $supplier['email'] ?>"> </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label" for="profileCompany">טלפון</label>
+                                                <label class="col-md-3 control-label">טלפון</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" id="profileCompany"> </div>
+                                                    <input type="text" class="form-control" name="phone" value="<?php echo $supplier['phone'] ?>"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">קטגוריה</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="category" value="<?php echo $supplier['category_id'] ?>"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">מיקום</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="location" value="<?php echo $supplier['location'] ?>"> </div>
+                                            </div>
+                                                                                        <div class="form-group">
+                                                <label class="col-md-3 control-label">מחיר</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="price" value="<?php echo $supplier['price'] ?>"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">וידאו</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="video_link" value="<?php echo $supplier['video_link'] ?>"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">כתובת</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="address" value="<?php echo $supplier['address'] ?>"> </div>
                                             </div>
                                         </fieldset>
                                         <hr class="dotted tall">
                                         <h4 class="mb-xlg">תקציר</h4>
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label" for="profileBio">תיאור הספק</label>
+                                                <label class="col-md-3 control-label">תיאור הספק</label>
                                                 <div class="col-md-8">
-                                                    <textarea class="form-control" rows="3" id="profileBio"></textarea>
+                                                    <textarea class="form-control" rows="8" name="description" placeholder="<?php echo $supplier['desc'] ?>"></textarea>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -178,15 +175,15 @@ $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
                                         <div class="panel-footer">
                                             <div class="row">
                                                 <div class="col-md-9 col-md-offset-3">
-                                                    <button type="submit" class="btn btn-primary">עדכן</button>
-                                                    <button type="reset" class="btn btn-default">אפס</button>
+                                                    <button type="submit" class="btn btn-primary" name="update">עדכן</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            
+
+                        <!-- End Profile Form -->
                             
                             <div class="col-md-3">
                                 <div class="profile-states">

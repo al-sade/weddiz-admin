@@ -1,8 +1,14 @@
 <?php
 require_once('head.php');
-$suppliers= $auth_admin->getAllSuppliers();
 
- ?>
+$suppliers= $auth_admin->getAllSuppliers();
+?>
+<?php
+if(isset($_POST['supplier_id'])){
+    $supplier_id = strip_tags($_POST['supplier_id']);
+    $auth_admin->deleteSupplier($supplier_id);
+}
+?>
     <body>
               <!-- Static navbar -->
 
@@ -39,6 +45,7 @@ $suppliers= $auth_admin->getAllSuppliers();
                                                 <th>דירוג</th>
                                                 <th>מיקום</th>
                                                 <th>מחיר</th>
+                                                <th>מחק ספק</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,6 +60,9 @@ $suppliers= $auth_admin->getAllSuppliers();
                                                 $output .= '<td>'.$supplier['rank'].'</td>';
                                                 $output .= '<td>'.$supplier['location'].'</td>';
                                                 $output .= '<td>'.$supplier['price'].'</td>';
+                                                $output .= '<td><form method="post">';
+                                                $output .= '<button class="delete-button" type="submit" name="supplier_id"  value="'.$supplier['supplier_id'].'">';
+                                                $output .= 'מחק</button></form></td>';
                                                 $output .= '</tr>';
                                                 echo $output;
                                               }
@@ -63,7 +73,6 @@ $suppliers= $auth_admin->getAllSuppliers();
                             </div><!-- End .panel -->
                         </div><!--end .col-->
                     </div><!--end .row-->
-
 
                 </div>
             </div>
@@ -83,8 +92,6 @@ $suppliers= $auth_admin->getAllSuppliers();
          <script src="js/waves.min.js"></script>
         <!--        <script src="js/jquery.nanoscroller.min.js"></script>-->
         <script type="text/javascript" src="js/custom.js"></script>
-         <script src="js/data-tables/tables-data.js"></script>
-
-        
+         <script src="js/data-tables/tables-data.js"></script>       
     </body>
 </html>

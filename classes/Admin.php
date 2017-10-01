@@ -82,6 +82,46 @@ public function getSupplier($supplier_id){
   return $result[0];
 }
 
+public function deleteSupplier($supplier_id){
+  $stmt = $this->conn->prepare(" DELETE FROM w_suppliers WHERE supplier_id = :supplier_id");
+  $stmt->execute(array(':supplier_id' => $supplier_id));
+  $result=$stmt->fetchall(PDO::FETCH_ASSOC);
+  return $result[0];
+}
+
+public function updateSupplier($supplier){
+    $stmt = $this->conn->prepare("UPDATE w_suppliers SET
+    first_name = :first_name,
+    last_name = :last_name,
+    email = :email,
+    phone = :phone,
+    address = :address,
+    rank = :rank,
+    location = :location,
+    price = :price,
+    `desc` = :description
+    WHERE supplier_id = :supplier_id;");
+    $stmt->bindparam(":first_name", $supplier['first_name']);
+    $stmt->bindparam(":last_name", $supplier['last_name']);
+    $stmt->bindparam(":email", $supplier['email']);
+    $stmt->bindparam(":phone", $supplier['phone']);
+    $stmt->bindparam(":address", $supplier['address']);
+    $stmt->bindparam(":rank", $supplier['rank']);
+    $stmt->bindparam(":location", $supplier['location']);
+    $stmt->bindparam(":price", $supplier['price']);
+    $stmt->bindparam(":description", $supplier['description']);
+    $stmt->bindparam(":supplier_id", $supplier['supplier_id']);
+    try{
+       $stmt->execute();
+    return $stmt; 
+    } catch (PDOException $e){
+            echo $e->getMessage();
+            return $stmt;
+      }
+    }
+   
+   
+
 public function getRecoSupplier($supplier_id){
   $stmt = $this->conn->prepare(" SELECT * FROM w_reco_suppliers WHERE supplier_id = :supplier_id");
   $stmt->execute(array(':supplier_id' => $supplier_id));
@@ -167,8 +207,8 @@ public function updateEventStatus($event_id, $new_status){
     $stmt = $this->conn->prepare("UPDATE w_events SET status = :new_status WHERE event_id = :event_id;");
     $stmt->bindparam(":event_id", $event_id);
     $stmt->bindparam(":new_status", $new_status);
-			$stmt->execute();
-			return $stmt;
+    $stmt->execute();
+    return $stmt;
 }
 
 public function getEventStatusList(){
