@@ -42,7 +42,7 @@ $albumName = $_GET['album_name'];
                                    if (in_array($ext, $supported_file)) {
                                        $imgSrc = "image.php?path=". $image ;
 
-                                       $output = '<div class="album-img" style="background: url("'.$imgSrc.'")>';
+                                       $output = '<div class="album-img" style="background: url("'.$imgSrc.'")></div>';
                                        echo $output;
                                    } else {
                                        continue;
