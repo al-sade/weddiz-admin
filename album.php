@@ -42,11 +42,8 @@ $albumName = $_GET['album_name'];
                                    if (in_array($ext, $supported_file)) {
                                        $imgSrc = "image.php?path=". $image ;
 
-                                       $output = '<div class="album-img" >';
-                                       $output .= '<img src="'.$imgSrc.'" height="150" width="150" /></div>';
-                                       //$output .= 'style="background-image: url('."image.php?path=".$image.')"></div>';
+                                       $output = '<div class="album-img" style="background: url("'.$imgSrc.'">';
                                        echo $output;
-//                                echo '<img src="'.$image .'" alt="Random image" />'."<br /><br />";
                                    } else {
                                        continue;
                                    }
