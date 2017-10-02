@@ -22,7 +22,7 @@ extract($_POST);
                 $file_tmp=$_FILES["files"]["tmp_name"][$key];
                 $ext=pathinfo($file_name,PATHINFO_EXTENSION);
                 if (!file_exists($album_path)) {
-                    mkdir($album_path, 0775);
+                    mkdir($album_path, 0775, true);
                 }                
                 $txtGalleryName = $album_path; //must exists
                 if(in_array($ext,$extension))
