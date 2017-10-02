@@ -43,7 +43,7 @@ $albumName = $_GET['album_name'];
                                        $imgSrc = "image.php?path=". $image ;
 
                                        $output = '<div class="album-img" >';
-                                       $output .= '<img src="'.$imgSrc.'" /></div>';
+                                       $output .= '<img style="background-image:url('.$imgSrc.') /></div>';
                                        //$output .= 'style="background-image: url('."image.php?path=".$image.')"></div>';
                                        echo $output;
 //                                echo '<img src="'.$image .'" alt="Random image" />'."<br /><br />";
