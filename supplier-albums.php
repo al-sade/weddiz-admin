@@ -13,8 +13,9 @@ extract($_POST);
     $error=array();
     $extension=array("jpeg","jpg","png","gif");
     $time = time();
-    $album_name = $time.'_'.$supplier_id;
-    $album_path=  'images/albums/'.$album_name;
+    // $album_name = $time.'_'.$supplier_id;
+    $album_name = $_POST['albumName'];
+    $album_path=  'images/albums/'.$supplier_id.'/'.$album_name;
     
     foreach($_FILES["files"]["tmp_name"] as $key=>$tmp_name)
             {
@@ -70,6 +71,11 @@ extract($_POST);
                                                 <table width="100%">
                                                     <tbody style="float: right;">
                                                         <tr>
+                                                            <td align="center">
+                                                                <input type="text" name="albumName" style="float: right;margin: 15px 0;" placeholder="שם אלבום"/>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>
                                                                 <input type="file" name="files[]" placeholder="בחר" id="files" class="hidden" multiple/> </td>
                                                             <label class="upload-album" for="files">בחר תמונה/תמונות</label>
@@ -94,8 +100,9 @@ extract($_POST);
                                         
                                             <?php
                                                 foreach($supplier_albums as $album){
+                                                    $link = 'album.php?album_name='.$album['album_name'].'&supplier_id='.$supplier_id.'&album_id='.$album['album_id'];
                                                     $output = '<div class=" gallery-col">';
-                                                    $output .= '<a href="album.php?album_name='.$album['album_name'].'" class="show-image">';
+                                                    $output .= '<a href="'.$link.'" class="show-image">';
                                                     $output .= '<img src="images/img-1.jpg" alt="" class="img-responsive">';
                                                     $output .= $album['album_name'];
                                                     $output .= '</a>';

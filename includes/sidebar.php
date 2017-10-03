@@ -29,13 +29,13 @@
                                   <li><a href="events.php">אירועים</a></li>
                                 </ul>
                             </li>
-                            <li class="active">
+                            <!-- <li class="active">
                                 <a href="albums.php"><i class="fa fa-th-large"></i> <span class="nav-label">אלבומים </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse in">
                                   <li><a href="albums.php">אלבומים</a></li>
                                   <li><a href="add_album.php">הוספה</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <li><a href="calendar.php"><i class="fa fa-calendar"></i>  <span class="nav-label">Calendar </span></a></li>
                             <li class="active">
                                 <a href="testimonials.php"><i class="fa fa-th-large"></i> <span class="nav-label">המלצות </span><span class="fa arrow"></span></a>

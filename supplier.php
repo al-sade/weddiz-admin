@@ -14,6 +14,8 @@ if(isset($_GET['r_sid'])){
 $supplier_name = $supplier['first_name'].' '.$supplier['last_name'];
 $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
 
+$stats = $auth_admin->getSupplierStats($supplier_id);
+
 if (isset($_POST['update'])){
     $supplier_data['supplier_id'] = $supplier_id;
     $supplier_data['first_name'] = strip_tags($_POST['first_name']);
@@ -65,7 +67,6 @@ if (isset($_POST['update'])){
                                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                             <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-github"></i></a></li>
                                         </ul>
                                         <hr> </div>
                                     <table class="table profile-detail table-condensed table-hover">
@@ -138,7 +139,7 @@ if (isset($_POST['update'])){
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">קטגוריה</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" name="category" value="<?php echo $supplier['category_id'] ?>"></div>
+                                                    <input type="text" class="form-control" name="category" value="<?php echo $supplier['category'] ?>"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">מיקום</label>
@@ -190,14 +191,14 @@ if (isset($_POST['update'])){
                                     <h3>נתונים</h3>
                                     <a class="wadmin-nav" href="supplier-albums.php?sid=<?php echo $supplier_id ?>">
                                         <div class="sale-state-box">
-                                            <h3>3</h3> <span>אלבומים</span> </div></a>
+                                            <h3><?php echo $stats['album'][0]['album'];?></h3> <span>אלבומים</span> </div></a>
                                         <div class="sale-state-box">
                                     
                                         <h3>654</h3> <span>פניות</span> </div>
                                     <div class="sale-state-box">
                                         <h3>79</h3> <span>חוזים</span> </div>
                                     <div class="sale-state-box">
-                                        <h3>16</h3> <span>המלצות</span> </div>
+                                        <h3><?php echo $stats['testimonials'][0]['testimonials'];?></h3> <span>המלצות</span> </div>
                                 </div>
                                 <div class="recent-activities">
                                     <h3>אירועים אחרונים</h3>

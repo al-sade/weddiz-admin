@@ -11,7 +11,7 @@ $albumName = $_GET['album_name'];
     <?php include('includes/sidebar.php');?>
         <div id="wrapper">
             <div class="content-wrapper container">
-                                         <div class="page-title">
+                            <div class="page-title">
                                 <h1>אלבומים <small></small></h1>
                                 <ol class="breadcrumb">
                                     <li><a href="#"><i class="fa fa-home"></i></a></li>
@@ -26,6 +26,7 @@ $albumName = $_GET['album_name'];
                                                                     
                             <?php
                                $files = glob(ALBUMS_PATH . $supplierId . "/" . $albumId. "/*.*");
+                                   var_dump(ALBUMS_PATH);
 
                                foreach ($files as $file){
                                    $image = $file;
@@ -42,7 +43,7 @@ $albumName = $_GET['album_name'];
                                    if (in_array($ext, $supported_file)) {
                                        $imgSrc = "image.php?path=". $image ;
 
-                                       $output = '<div class="album-img" style="background-image:url("'.$imgSrc.'")"></div>';
+                                       $output = '<div class="album-img"><img src="'.$imgSrc.'"</div>';
                                        echo $output;
                                    } else {
                                        continue;

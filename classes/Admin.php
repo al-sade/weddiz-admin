@@ -89,6 +89,31 @@ public function deleteSupplier($supplier_id){
   return $result[0];
 }
 
+public function getSupplierStats($supplier_id){
+  $stmt = $this->conn->prepare("SELECT COUNT( album_id ) AS album FROM w_albums 
+  WHERE supplier_id = :supplier_id");
+  $stmt->execute(array(':supplier_id' => $supplier_id));
+  $result['album']=$stmt->fetchall(PDO::FETCH_ASSOC);
+  
+  $stmt = $this->conn->prepare("SELECT COUNT( testimonial_id ) AS testimonials FROM w_testimonials 
+  WHERE supplier_id = :supplier_id");
+  $stmt->execute(array(':supplier_id' => $supplier_id));
+  $result['testimonials']=$stmt->fetchall(PDO::FETCH_ASSOC);
+
+  // $stmt = $this->conn->prepare("SELECT COUNT( event_id ) AS events FROM w_events 
+  // WHERE supplier_id = :supplier_id");
+  // $stmt->execute(array(':supplier_id' => $supplier_id));
+  // $result['events']=$stmt->fetchall(PDO::FETCH_ASSOC);
+  
+  // $stmt = $this->conn->prepare("SELECT COUNT( event_id ) AS events FROM w_events 
+  // WHERE status = 3 OR status = 4 
+  // AND supplier_id = :supplier_id");
+  // $stmt->execute(array(':supplier_id' => $supplier_id));
+  // $result['deals']=$stmt->fetchall(PDO::FETCH_ASSOC);
+
+  return $result;
+}
+
 public function updateSupplier($supplier){
     $stmt = $this->conn->prepare("UPDATE w_suppliers SET
     first_name = :first_name,
