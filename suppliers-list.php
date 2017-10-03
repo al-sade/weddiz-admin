@@ -4,7 +4,7 @@ require_once('head.php');
 $suppliers= $auth_admin->getAllSuppliers();
 ?>
 <?php
-if(isset($_POST['delete_supplier'])){
+if(isset($_POST['supplier_id'])){
     $supplier_id = strip_tags($_POST['supplier_id']);
     $auth_admin->deleteSupplier($supplier_id);
     echo "<meta http-equiv='refresh' content='0'>";
@@ -63,7 +63,7 @@ if(isset($_POST['delete_supplier'])){
                                                 $output .= '<td>'.$supplier['location'].'</td>';
                                                 $output .= '<td>'.$supplier['price'].'</td>';
                                                 $output .= '<td><form method="post">';
-                                                $output .= '<button class="delete-button" type="submit" name="delete_supplier"  value="'.$supplier['supplier_id'].'">';
+                                                $output .= '<button class="delete-button" type="submit" name="supplier_id"  value="'.$supplier['supplier_id'].'">';
                                                 $output .= 'מחק</button></form></td>';
                                                 $output .= '</tr>';
                                                 echo $output;

@@ -62,7 +62,7 @@ class ADMIN
         $stmt = $this->conn->prepare(" SELECT category_name FROM w_categories WHERE category_id = :cat_id");
         $stmt->execute(array(':cat_id' => $cat_id));
         $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-        return $result[0];
+        return $result;
     }
 
     public function getRecoCategoryName($cat_id)
@@ -85,8 +85,7 @@ class ADMIN
     {
         $stmt = $this->conn->prepare(" DELETE FROM w_suppliers WHERE supplier_id = :supplier_id");
         $stmt->execute(array(':supplier_id' => $supplier_id));
-        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-        return $result[0];
+        return $stmt;
     }
 
     public function getSupplierStats($supplier_id)
@@ -231,6 +230,7 @@ class ADMIN
         SELECT wt.* , ws.first_name,ws.last_name
         FROM w_testimonials wt
         INNER JOIN w_suppliers ws
+        ON wt.supplier_id = ws.supplier_id
         ORDER BY submit_date DESC
         ");
         $stmt->execute();
@@ -446,9 +446,9 @@ class ADMIN
     {
         $stmt = $this->conn->prepare(" DELETE FROM w_testimonials WHERE testimonial_id = :testimonial_id");
         $stmt->execute(array(':testimonial_id' => $testimonial_id));
-        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-        return $result[0];
+        return $stmt;
     }
+
 
 //End of Admin Class
 }

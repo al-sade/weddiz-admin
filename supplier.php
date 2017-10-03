@@ -1,15 +1,25 @@
 <?php
 require_once('head.php');
 
+function getCategory($supplier, $categories) {
+    for ($i = 0; $i < count($categories); $i++){
+        if(array_search($supplier['category_id'], $categories[$i])){
+            return $categories[$i]['category_name'];
+        }
+    }
+    return false;
+}
+
 if(isset($_GET['r_sid'])){
    $supplier_id = $_GET['r_sid'];
    $supplier = $auth_admin->getRecoSupplier($supplier_id); 
-   $supplier['category'] = $auth_admin->getRecoCategoryName($supplier['category_id']);
 }else{
    $supplier_id = $_GET['sid'];
    $supplier = $auth_admin->getSupplier($supplier_id);
-   $supplier['category'] = $auth_admin->getCategoryName($supplier['category_id']);
 }
+
+$categories = $auth_admin->getCategories();
+$supplier['category_name'] = getCategory($supplier, $categories);
 
 $supplier_name = $supplier['first_name'].' '.$supplier['last_name'];
 $supplier_pic = LOCALIMG . $supplier['profile_pic'] ;
@@ -139,7 +149,7 @@ if (isset($_POST['update'])){
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">קטגוריה</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" name="category" value="<?php echo $supplier['category'] ?>"></div>
+                                                    <input type="text" class="form-control" name="category" value="<?php echo $supplier['category_name'] ?>"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">מיקום</label>

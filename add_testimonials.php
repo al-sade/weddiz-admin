@@ -14,6 +14,7 @@ if(isset($_POST['submit'])){
     }catch (Exception $e) {
 		echo $e->getMessage();
 	}
+    echo "<meta http-equiv='refresh' content='0'>";
 }
  ?>
 
