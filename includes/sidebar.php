@@ -40,6 +40,7 @@
                             <li class="active">
                                 <a href="testimonials.php"><i class="fa fa-th-large"></i> <span class="nav-label">המלצות </span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level collapse in">
+                                  <li><a href="testimonials.php">רשימת המלצות</a></li>
                                   <li><a href="add_testimonials.php">הוספת המלצה</a></li>
                                 </ul>
                             </li>
