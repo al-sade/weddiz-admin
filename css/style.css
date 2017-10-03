@@ -1,17 +1,22 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,800';
 
 /*** Al's Custom***/
-button.delete-album {
+
+button.delete-album, button.delete-img {
     position: relative;
     top: 30px;
     border: none;
     font-size: 25px;
 }
 
-button.delete-album:hover:before {
+.delete-img{
+    top: 0px !important;
+}
+
+button.delete-album:hover:before, button.delete-img:hover:before {
     color: #01a8fe;
 }
-.delete-album:before {
+.delete-album:before, .delete-img:before {
     content: "\f00d";
     font-family: "FontAwesome";
     color: #666;
