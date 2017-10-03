@@ -449,6 +449,13 @@ class ADMIN
         return $stmt;
     }
 
+    public function deleteAlbum($album_id)
+    {
+        $stmt = $this->conn->prepare(" DELETE FROM w_albums WHERE album_id = :album_id");
+        $stmt->execute(array(':album_id' => $album_id));
+        return $stmt;
+    }
+
 
 //End of Admin Class
 }

@@ -58,10 +58,10 @@ function saveAlbum($auth_admin)
         $supplierAlbumsPath = ALBUMS_PATH . $supplierId;
         $currentAlbumPath = $supplierAlbumsPath . "/" . $albumId;
         if (!file_exists($supplierAlbumsPath)) {
-            mkdir($supplierAlbumsPath, 0777);
+            mkdir($supplierAlbumsPath, 0775, true);
         }
         if (!file_exists($currentAlbumPath)) {
-            mkdir($currentAlbumPath, 0777);
+            mkdir($currentAlbumPath, 0775, true);
         }
         $txtGalleryName = $currentAlbumPath; //must exists
         if (in_array($ext, $extension)) {

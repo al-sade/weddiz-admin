@@ -26,7 +26,6 @@ $albumName = $_GET['album_name'];
                                                                     
                             <?php
                                $files = glob(ALBUMS_PATH . $supplierId . "/" . $albumId. "/*.*");
-                                   var_dump(ALBUMS_PATH);
 
                                foreach ($files as $file){
                                    $image = $file;
@@ -43,7 +42,7 @@ $albumName = $_GET['album_name'];
                                    if (in_array($ext, $supported_file)) {
                                        $imgSrc = "image.php?path=". $image ;
 
-                                       $output = '<div class="album-img"><img src="'.$imgSrc.'"</div>';
+                                       $output = '<div class="album-img" style="background-image: url('.$imgSrc.');"></div>';
                                        echo $output;
                                    } else {
                                        continue;
