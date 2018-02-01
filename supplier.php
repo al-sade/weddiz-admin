@@ -82,21 +82,20 @@ if (isset($_POST['update'])){
                                     <table class="table profile-detail table-condensed table-hover">
                                         <thead>
                                             <tr>
-                                                <th colspan="3">פרטי התקשרות</th>
+                                                <th colspan="3">mפרטי התקשרות</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>לינק</td>
-                                                <td> <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/weddis/supplier.php?sid='.$supplier['supplier_id']; ?>">
+                                                <td> <a target="_blank" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/weddis/supplier.php?sid='.$supplier['supplier_id']; ?>">
                                         עמוד ספק
                                     </a></td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>
                                         <tr>
                                                 <td>וידאו</td>
                                                 <td>
-                                                    <a href="<?php echo $supplier['video_link'] ?>" target="_blank">נגן סרטון</a>
+                                                    <a target="_blank" href="<?php echo $supplier['video_link'] ?>" target="_blank">נגן סרטון</a>
                                                 </td>
                                                 <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>

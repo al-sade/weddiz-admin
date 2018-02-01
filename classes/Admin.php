@@ -122,6 +122,7 @@ class ADMIN
     email = :email,
     phone = :phone,
     address = :address,
+    video_link = :video_link,
     rank = :rank,
     location = :location,
     price = :price,
@@ -132,6 +133,7 @@ class ADMIN
         $stmt->bindparam(":email", $supplier['email']);
         $stmt->bindparam(":phone", $supplier['phone']);
         $stmt->bindparam(":address", $supplier['address']);
+        $stmt->bindparam(":video_link", $supplier['video_link']);
         $stmt->bindparam(":rank", $supplier['rank']);
         $stmt->bindparam(":location", $supplier['location']);
         $stmt->bindparam(":price", $supplier['price']);
