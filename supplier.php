@@ -38,6 +38,7 @@ if (isset($_POST['update'])){
 	$supplier_data['video_link'] = strip_tags($_POST['video_link']);
 	$supplier_data['address'] = strip_tags($_POST['address']);
 	$supplier_data['description'] = strip_tags($_POST['description']);
+	$supplier_data['fb_link'] = strip_tags($_POST['fb_link']);
 
     $auth_admin->updateSupplier($supplier_data);
     echo "<meta http-equiv='refresh' content='0'>";
@@ -73,10 +74,8 @@ if (isset($_POST['update'])){
                                         <h3><?php echo $supplier_name ?></h3>
                                         <hr>
                                         <ul class="socials list-inline">
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a target="_blank" href="<?php echo $supplier['fb_link']?>"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="mailto:<?php echo $supplier['email']?>"><i class="fa fa-envelope"></i></a></li>
                                         </ul>
                                         <hr> </div>
                                     <table class="table profile-detail table-condensed table-hover">
@@ -97,7 +96,6 @@ if (isset($_POST['update'])){
                                                 <td>
                                                     <a target="_blank" href="<?php echo $supplier['video_link'] ?>" target="_blank">נגן סרטון</a>
                                                 </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>
                                             <tr>
                                                 <td>מומלץ</td>
@@ -108,7 +106,6 @@ if (isset($_POST['update'])){
                                                     <span class="label label-sm label-info"><i class="glyphicon glyphicon-star-empty" data-value="2"></i></span>
                                                             <?php } ?>
                                                 </td>
-                                                <td><a href="#panel_edit_account" class="show-tab"><i class="fa fa-pencil edit-user-info"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -169,6 +166,11 @@ if (isset($_POST['update'])){
                                                 <label class="col-md-3 control-label">כתובת</label>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control" name="address" value="<?php echo $supplier['address'] ?>"> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">פייסבוק</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="fb_link" value="<?php echo $supplier['fb_link'] ?>"> </div>
                                             </div>
                                         </fieldset>
                                         <hr class="dotted tall">

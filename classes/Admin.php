@@ -126,7 +126,8 @@ class ADMIN
     rank = :rank,
     location = :location,
     price = :price,
-    `desc` = :description
+    `desc` = :description,
+    `fb_link` = :fb_link
     WHERE supplier_id = :supplier_id;");
         $stmt->bindparam(":first_name", $supplier['first_name']);
         $stmt->bindparam(":last_name", $supplier['last_name']);
@@ -138,6 +139,7 @@ class ADMIN
         $stmt->bindparam(":location", $supplier['location']);
         $stmt->bindparam(":price", $supplier['price']);
         $stmt->bindparam(":description", $supplier['description']);
+        $stmt->bindparam(":fb_link", $supplier['fb_link']);
         $stmt->bindparam(":supplier_id", $supplier['supplier_id']);
         try {
             $stmt->execute();
@@ -306,7 +308,7 @@ class ADMIN
       `joining_date`
       )
       VALUES (
-        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP
+        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, :fb_link, CURRENT_TIMESTAMP
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -322,6 +324,7 @@ class ADMIN
             $stmt->bindparam(":video_link", $video);
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
+            $stmt->bindparam(":fb_link", $fb_link);
             $stmt->execute();
 
             return $stmt;
@@ -330,7 +333,7 @@ class ADMIN
         }
     }
 
-    public function registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc)
+    public function registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link)
     {
         try {
 
@@ -351,10 +354,11 @@ class ADMIN
       `video_link` ,
       `reco` ,
       `desc` ,
+      `fb_link` ,
       `joining_date`
       )
       VALUES (
-        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP
+        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, :fb_link, CURRENT_TIMESTAMP
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -370,6 +374,7 @@ class ADMIN
             $stmt->bindparam(":video_link", $video);
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
+            $stmt->bindparam(":fb_link", $fb_link);
             $stmt->execute();
 
             return $stmt;

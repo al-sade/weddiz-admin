@@ -18,6 +18,7 @@ $locations = $auth_admin->getLocations();
 	$price = strip_tags($_POST['price']);
 	$video = strip_tags($_POST['video_link']);
 	$desc = strip_tags($_POST['desc']);
+	$fb_link = strip_tags($_POST['fb_link']);
     if(isset($_POST['reco']) && $_POST['reco']){
     $reco = strip_tags($_POST['reco']);
     } else{
@@ -256,6 +257,17 @@ $locations = $auth_admin->getLocations();
                                                                 <div class="row">
                                                                     <div class="col-md-8">
                                                                         <input type="text" name="desc" placeholder="תקציר" class="form-control"> </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="hr-line-dashed"></div>
+                                                        <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label"> עמוד פייסבוק</label>
+                                                            <div class="col-sm-10">
+                                                                <div class="row">
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" name="fb_link" placeholder="לינק לעמוד פייסבוק" class="form-control"> </div>
                                                                 </div>
                                                             </div>
                                                         </div>

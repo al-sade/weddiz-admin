@@ -1,10 +1,9 @@
-<?php
-require_once('head.php');
- ?>
+<?php require_once('head.php'); ?>
+
     <body>
           <!-- Static navbar -->
      <?php include('includes/header.php');?>
-
+        
         <section class="page">
 
                  <?php include('includes/sidebar.php');?>
@@ -17,7 +16,7 @@ require_once('head.php');
                                 <h1>Calendar<small></small></h1>
                                 <ol class="breadcrumb">
                                     <li><a href="#"><i class="fa fa-home"></i></a></li>
-                                    <li class="active">Calendar</li>
+                                    <li class="active">לוח שנה</li>
                                 </ol>
                             </div>
                         </div>
@@ -25,30 +24,16 @@ require_once('head.php');
 
 
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div id='calendar'></div>
 
                             <div class="clearfix"></div>
 
                         </div>
-                        <div class="col-md-3">
-                            <div id='external-events'>
-                                <h4>Draggable Events</h4>
-                                <div class='fc-event'>My Event 1</div>
-                                <div class='fc-event'>My Event 2</div>
-                                <div class='fc-event'>My Event 3</div>
-                                <div class='fc-event'>My Event 4</div>
-                                <div class='fc-event'>My Event 5</div>
-                                <p>
-                                    <input type='checkbox' id='drop-remove' />
-                                    <label for='drop-remove'>remove after drop</label>
-                                </p>
-                            </div>
 
-                        </div>
                     </div>
 
-                </div>
+                </div> 
             </div>
         </section>
 
@@ -66,23 +51,6 @@ require_once('head.php');
         <script src="js/fullcalendar/jquery-ui.custom.min.js"></script>
         <script src="js/fullcalendar/fullcalendar.min.js"></script>
         <script src="js/fullcalendar-custom.js"></script>
-        <!-- Google Analytics:  -->
-        <script>
-            (function (i, s, o, g, r, a, m)
-            {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function ()
-                {
-                    (i[r].q = i[r].q || []).push(arguments);
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-3560057-28', 'auto');
-            ga('send', 'pageview');
-        </script>
+
     </body>
 </html>

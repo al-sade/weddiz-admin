@@ -21,6 +21,7 @@
         <link href="css/waves.min.css" type="text/css" rel="stylesheet"><link rel="stylesheet" href="css/nanoscroller.css">
         <link href="css/awesome-bootstrap-checkbox.css" rel="stylesheet">
         <link href="css/menu-light.css" type="text/css" rel="stylesheet">
+        <link href="css/fullcalendar.min.css" type="text/css" rel="stylesheet">
         <link href="css/style.css" type="text/css" rel="stylesheet">
         <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
 				<link rel="stylesheet" href="css/jquery.fileupload.css">
