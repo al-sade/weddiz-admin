@@ -264,15 +264,6 @@ class ADMIN
         return $stmt;
     }
 
-    public function getEventStatusList()
-    {
-        $stmt = $this->conn->prepare(" SELECT * FROM w_event_status");
-        $stmt->execute();
-        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
-
-        return $result;
-    }
-
     public function getEventStatus($event_id)
     {
         $stmt = $this->conn->prepare(" SELECT status FROM w_events WHERE event_id = :event_id");
@@ -284,31 +275,25 @@ class ADMIN
         return $result[0]['status'];
     }
 
-    public function registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc)
+    public function getEventStatusList()
+    {
+        $stmt = $this->conn->prepare(" SELECT * FROM w_event_status");
+        $stmt->execute();
+        $result = $stmt->fetchall(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link)
     {
         try {
 
 
             $stmt = $this->conn->prepare("INSERT INTO  w_suppliers (
-      `supplier_id` ,
-      `first_name` ,
-      `last_name` ,
-      `email` ,
-      `phone` ,
-      `address` ,
-      `rank` ,
-      `category_id` ,
-      `location` ,
-      `price` ,
-      `last_update` ,
-      `profile_pic` ,
-      `video_link` ,
-      `reco` ,
-      `desc` ,
-      `joining_date`
+      `first_name`, `last_name`, `email`, `phone`, `address`, `rank`, `category_id`, `location`, `price`, `profile_pic`, `video_link`, `reco`, `desc`, `joining_date`, `fb_link`
       )
       VALUES (
-        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, :fb_link, CURRENT_TIMESTAMP
+        :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -320,7 +305,7 @@ class ADMIN
             $stmt->bindparam(":category_id", $category_id);
             $stmt->bindparam(":location", $location);
             $stmt->bindparam(":price", $price);
-            $stmt->bindparam(":profile_pic", $profile_pic);
+            $stmt->bindparam(":profile_pic", $file_name);
             $stmt->bindparam(":video_link", $video);
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
@@ -354,11 +339,11 @@ class ADMIN
       `video_link` ,
       `reco` ,
       `desc` ,
+      `joining_date`,
       `fb_link` ,
-      `joining_date`
       )
       VALUES (
-        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, :fb_link, CURRENT_TIMESTAMP
+        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -370,13 +355,14 @@ class ADMIN
             $stmt->bindparam(":category_id", $category_id);
             $stmt->bindparam(":location", $location);
             $stmt->bindparam(":price", $price);
-            $stmt->bindparam(":profile_pic", $profile_pic);
+            $stmt->bindparam(":profile_pic", $file_name);
             $stmt->bindparam(":video_link", $video);
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
             $stmt->bindparam(":fb_link", $fb_link);
             $stmt->execute();
 
+//            var_dump($stmt);
             return $stmt;
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -461,6 +447,28 @@ class ADMIN
         $stmt = $this->conn->prepare(" DELETE FROM w_albums WHERE album_id = :album_id");
         $stmt->execute(array(':album_id' => $album_id));
         return $stmt;
+    }
+
+    public function getDashData()
+    {
+        $query = "SELECT COUNT(*) FROM w_events;";
+        $query .= "SELECT COUNT(*) FROM w_events WHERE status = 1 OR status = 2;";
+        $query .= "SELECT COUNT(*) FROM w_events WHERE status = 4;";
+        $query .= "SELECT event_id, contact_name as name, contact_mail as mail,contact_phone as phone, suppliers ";
+        $query .= "FROM w_events ORDER BY submission_date ASC LIMIT 7;";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result["events_total"] = $stmt->fetchColumn();
+
+        $stmt->nextRowset(); // shift to the total
+        $result["open_events"] = $stmt->fetchColumn();
+
+        $stmt->nextRowset(); // shift to the total
+        $result["done_events"] = $stmt->fetchColumn();
+
+        $stmt->nextRowset(); // shift to the total
+        $result["latest_events"] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
 

@@ -31,9 +31,9 @@ $locations = $auth_admin->getLocations();
     $target_file = $target_dir . $file_name;
 
     if(strpos($category_id, 'r_') !== false){
-		$auth_admin->registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc);
+		$auth_admin->registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link);
     } else{
-        $auth_admin->registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc);
+        $auth_admin->registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link);
     }
 
     $uploadOk = 1;
