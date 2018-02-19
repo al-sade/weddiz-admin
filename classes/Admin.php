@@ -127,7 +127,8 @@ class ADMIN
     location = :location,
     price = :price,
     `desc` = :description,
-    `fb_link` = :fb_link
+    `fb_link` = :fb_link,
+    `slogan` = :slogan
     WHERE supplier_id = :supplier_id;");
         $stmt->bindparam(":first_name", $supplier['first_name']);
         $stmt->bindparam(":last_name", $supplier['last_name']);
@@ -140,6 +141,7 @@ class ADMIN
         $stmt->bindparam(":price", $supplier['price']);
         $stmt->bindparam(":description", $supplier['description']);
         $stmt->bindparam(":fb_link", $supplier['fb_link']);
+        $stmt->bindparam(":slogan", $supplier['slogan']);
         $stmt->bindparam(":supplier_id", $supplier['supplier_id']);
         try {
             $stmt->execute();
@@ -284,16 +286,16 @@ class ADMIN
         return $result;
     }
 
-    public function registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link)
+    public function registerSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link, $slogan)
     {
         try {
 
 
             $stmt = $this->conn->prepare("INSERT INTO  w_suppliers (
-      `first_name`, `last_name`, `email`, `phone`, `address`, `rank`, `category_id`, `location`, `price`, `profile_pic`, `video_link`, `reco`, `desc`, `joining_date`, `fb_link`
+      `first_name`, `last_name`, `email`, `phone`, `address`, `rank`, `category_id`, `location`, `price`, `profile_pic`, `video_link`, `reco`, `desc`, `joining_date`, `fb_link`, `slogan`
       )
       VALUES (
-        :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link
+        :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link, :slogan
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -306,10 +308,12 @@ class ADMIN
             $stmt->bindparam(":location", $location);
             $stmt->bindparam(":price", $price);
             $stmt->bindparam(":profile_pic", $file_name);
+            $stmt->bindparam(":profile_pic", $file_name);
             $stmt->bindparam(":video_link", $video);
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
             $stmt->bindparam(":fb_link", $fb_link);
+            $stmt->bindparam(":slogan", $slogan);
             $stmt->execute();
 
             return $stmt;
@@ -318,7 +322,7 @@ class ADMIN
         }
     }
 
-    public function registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link)
+    public function registerRecoSupplier($file_name, $first_name, $last_name, $email, $phone, $address, $rank, $category_id, $location, $price, $video, $reco, $desc, $fb_link, $slogan)
     {
         try {
 
@@ -341,9 +345,10 @@ class ADMIN
       `desc` ,
       `joining_date`,
       `fb_link` ,
+      `slogan` ,
       )
       VALUES (
-        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link
+        NULL, :first_name, :last_name, :email, :phone, :address, :rank, :category_id, :location, :price, NULL, :profile_pic, :video_link ,:reco, :desc, CURRENT_TIMESTAMP, :fb_link, :slogan
       );");
 
             $stmt->bindparam(":first_name", $first_name);
@@ -360,6 +365,7 @@ class ADMIN
             $stmt->bindparam(":reco", $reco);
             $stmt->bindparam(":desc", $desc);
             $stmt->bindparam(":fb_link", $fb_link);
+            $stmt->bindparam(":slogan", $slogan);
             $stmt->execute();
 
 //            var_dump($stmt);

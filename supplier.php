@@ -39,6 +39,7 @@ if (isset($_POST['update'])){
 	$supplier_data['address'] = strip_tags($_POST['address']);
 	$supplier_data['description'] = strip_tags($_POST['description']);
 	$supplier_data['fb_link'] = strip_tags($_POST['fb_link']);
+	$supplier_data['slogan'] = strip_tags($_POST['slogan']);
 
     $auth_admin->updateSupplier($supplier_data);
     echo "<meta http-equiv='refresh' content='0'>";
@@ -74,10 +75,11 @@ if (isset($_POST['update'])){
                                         <h3><?php echo $supplier_name ?></h3>
                                         <hr>
                                         <ul class="socials list-inline">
-                                            <li><a target="_blank" href="<?php echo $supplier['fb_link']?>"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="mailto:<?php echo $supplier['email']?>"><i class="fa fa-envelope"></i></a></li>
+                                            <li><a target="_blank" href="<?php echo $supplier['fb_link']?>"><i class="fa fa-facebook" style="position: relative; top: 7px;"></i></a></li>
+                                            <li><a href="mailto:<?php echo $supplier['email']?>"><i class="fa fa-envelope"  style="position: relative; top: 7px;"></i></a></li>
                                         </ul>
-                                        <hr> </div>
+                                        <hr>
+                                    </div>
                                     <table class="table profile-detail table-condensed table-hover">
                                         <thead>
                                             <tr>
@@ -171,6 +173,11 @@ if (isset($_POST['update'])){
                                                 <label class="col-md-3 control-label">פייסבוק</label>
                                                 <div class="col-md-8">
                                                     <input type="text" class="form-control" name="fb_link" value="<?php echo $supplier['fb_link'] ?>"> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">סלוגן</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" name="slogan" value="<?php echo $supplier['slogan'] ?>"> </div>
                                             </div>
                                         </fieldset>
                                         <hr class="dotted tall">
